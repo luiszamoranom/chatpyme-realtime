@@ -20,11 +20,12 @@ const Medicos = () => {
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
   const [showIcons, setShowIcons] = useState(false);
+  const [selectedChannel, setSelectedChannel] = useState("medicos");
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        onValue(ref(db, `/mensaje_medicos`), (snapshot) => {
+        onValue(ref(db, `/mensaje_${selectedChannel}`), (snapshot) => {
           const data = snapshot.val();
           if (data !== null) {
             const sortedTodos = Object.values(data).sort((b,a) => b.timestamp - a.timestamp);
@@ -63,7 +64,7 @@ const Medicos = () => {
     const userEmail = auth.currentUser.email;
     const username = getUsernameFromEmail(userEmail);
     const timestamp = Date.now();
-    set(ref(db, `/mensaje_medicos/${uidd}`), {
+    set(ref(db, `/mensaje_${selectedChannel}/${uidd}`), {
       todo: `${username}: ${todo}`,
       uidd: uidd,
       timestamp: timestamp
@@ -86,7 +87,7 @@ const Medicos = () => {
     const userEmail = auth.currentUser.email;
     const username = getUsernameFromEmail(userEmail);
     const timestamp = Date.now();
-    update(ref(db, `/mensaje_medicos/${tempUidd}`), {
+    update(ref(db, `/mensaje_${selectedChannel}/${tempUidd}`), {
       todo: `${username}: ${todo}`,
       timestamp: timestamp
     });
@@ -96,25 +97,43 @@ const Medicos = () => {
   };
 
   const handleDelete = (uid) => {
-    remove(ref(db, `/mensaje_medicos/${uid}`));
+    remove(ref(db, `/mensaje_${selectedChannel}/${uid}`));
   };
 
   const handleConfigClick = () => {
     setShowIcons(!showIcons);
   }
 
+  const handleChannelChange = (channel) => {
+    setSelectedChannel(channel);
+  
+    onValue(ref(db, `/mensaje_${channel}`), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        const sortedTodos = Object.values(data).sort((b, a) => b.timestamp - a.timestamp);
+        setTodos(sortedTodos);
+      } else {
+        setTodos([]);
+      }
+    });
+  };
+  
   return (
     <div className="chat-container">
       <div className="navbar">
         <h2>Canales</h2>
         <ul>
-          
+        {["medicos", "admision", "pabellon", "examenes", "auxiliares"].map((channel) => (
+            <li key={channel} onClick={() => handleChannelChange(channel)}>
+              {channel}
+            </li>
+        ))}
         </ul>
       </div>
 
       <div className="chat">
         <div className="chat-header">
-          <h2>Chat</h2>
+          <h2>Chat - {selectedChannel}</h2>
           <Settings onClick={handleConfigClick} className="config-icon" />
         </div>
 
