@@ -10,13 +10,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LogoutIcon from '@mui/icons-material/Logout';
 import CheckIcon from '@mui/icons-material/Check';
+//import config icon
+import { Settings } from '@mui/icons-material';
 
-export default function Medicos() {
+const Medicos = () => {
   const [todo, setTodo] = useState("");
   const [mensaje_medicos, setTodos] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
+  const [showIcons, setShowIcons] = useState(false);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -24,7 +27,7 @@ export default function Medicos() {
         onValue(ref(db, `/mensaje_medicos`), (snapshot) => {
           const data = snapshot.val();
           if (data !== null) {
-            const sortedTodos = Object.values(data).sort((b,a) => b.timestamp - a.timestamp); // Ordena las tareas por marca de tiempo
+            const sortedTodos = Object.values(data).sort((b,a) => b.timestamp - a.timestamp);
             setTodos(sortedTodos);
           } else {
             setTodos([]);
@@ -38,11 +41,11 @@ export default function Medicos() {
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
-    return date.toLocaleTimeString(); // O usa otro formato que prefieras
+    return date.toLocaleTimeString();
   };
 
   const getUsernameFromEmail = (email) => {
-    return email.split('@')[0]; // Divide el correo electrónico en el '@' y toma la primera parte
+    return email.split('@')[0];
   };
 
   const handleSignOut = () => {
@@ -55,22 +58,20 @@ export default function Medicos() {
       });
   };
 
-  // add
   const writeToDatabase = () => {
     const uidd = uid();
     const userEmail = auth.currentUser.email;
     const username = getUsernameFromEmail(userEmail);
-    const timestamp = Date.now(); // Obtener la marca de tiempo actual
+    const timestamp = Date.now();
     set(ref(db, `/mensaje_medicos/${uidd}`), {
       todo: `${username}: ${todo}`,
       uidd: uidd,
-      timestamp: timestamp // Añadir la marca de tiempo
+      timestamp: timestamp
     });
-  
+
     setTodo("");
   };
 
-  // update
   const handleUpdate = (todo) => {
     setIsEdit(true);
     setTodo(todo.todo);
@@ -89,55 +90,73 @@ export default function Medicos() {
       todo: `${username}: ${todo}`,
       timestamp: timestamp
     });
-  
+
     setTodo("");
     setIsEdit(false);
   };
-  
 
-  // delete
   const handleDelete = (uid) => {
     remove(ref(db, `/mensaje_medicos/${uid}`));
   };
 
+  const handleConfigClick = () => {
+    setShowIcons(!showIcons);
+  }
+
   return (
-    <div>
-      <div className="barra">
-        <input
-          className="add-edit-input"
-          type="text"
-          placeholder="Add todo..."
-          value={todo}
-          onChange={(e) => setTodo(e.target.value)}
-        />
-
-      <button  onClick={handleIrMedicos}>
-        Chat MEdicos
-      </button>
-
-        <AddIcon onClick={writeToDatabase} className="add-confirm-icon" />
-        <LogoutIcon onClick={handleSignOut} className="logout-icon" />
+    <div className="chat-container">
+      <div className="navbar">
+        <h2>Canales</h2>
+        <ul>
+          
+        </ul>
       </div>
-      
-      <div className="homepage">
-      {mensaje_medicos.map((todo) => (
-        <div className="todo">
-          <h1>{formatTimestamp(todo.timestamp)} - {todo.todo}</h1>
-          <EditIcon
-            fontSize="large"
-            onClick={() => handleUpdate(todo)}
-            className="edit-button"
-          />
-          <DeleteIcon
-            fontSize="large"
-            onClick={() => handleDelete(todo.uidd)}
-            className="delete-button"
-          />
-        </div>
-      ))}
 
-    
-    </div>
+      <div className="chat">
+        <div className="chat-header">
+          <h2>Chat</h2>
+          <Settings onClick={handleConfigClick} className="config-icon" />
+        </div>
+
+        <div className="messages">
+          {mensaje_medicos.map((todo) => (
+            <div key={todo.uidd} className="message">
+              {formatTimestamp(todo.timestamp)} - {todo.todo}
+              {showIcons && (
+                <>
+                  <EditIcon
+                    fontSize="small"
+                    onClick={() => handleUpdate(todo)}
+                    className="edit-button"
+                  />
+                  <DeleteIcon
+                    fontSize="small"
+                    onClick={() => handleDelete(todo.uidd)}
+                    className="delete-button"
+                  />
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="input-box">
+  <input
+    type="text"
+    placeholder={isEdit ? "Editar mensaje..." : "Nuevo mensaje..."}
+    value={todo}
+    onChange={(e) => setTodo(e.target.value)}
+  />
+  <CheckIcon
+    onClick={() => (isEdit ? handleEditConfirm() : writeToDatabase())}
+    className={isEdit ? "edit-confirm-icon" : "edit-confirm-icon"}
+  />
+  <LogoutIcon onClick={handleSignOut} className="logout-icon" />
+</div>
+
+      </div>
     </div>
   );
-}
+};
+
+export default Medicos;
