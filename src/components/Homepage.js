@@ -77,6 +77,10 @@ export default function Homepage() {
     setTempUidd(todo.uidd);
   };
 
+  const handleIrAdmin = () => {
+    navigate("/admin");
+  };
+
   const handleIrMedicos = () => {
     navigate("/medicos");
   };
@@ -124,6 +128,11 @@ export default function Homepage() {
           onChange={(e) => setTodo(e.target.value)}
         />
 
+
+      <button  onClick={handleIrAdmin}>
+        Chat Admin
+      </button>
+
       <button  onClick={handleIrMedicos}>
         Chat Medicos
       </button>
@@ -140,7 +149,7 @@ export default function Homepage() {
       <button  onClick={handleIrPabellon}>
         Chat Pabellon
       </button>
-
+s
 
         <AddIcon onClick={writeToDatabase} className="add-confirm-icon" />
         <LogoutIcon onClick={handleSignOut} className="logout-icon" />

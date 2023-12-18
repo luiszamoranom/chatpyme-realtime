@@ -7,19 +7,21 @@ import Auxiliares from "./components/Auxiliares";
 import Examenes from "./components/Examenes";
 import Admision from "./components/Admision";
 import Pabellon from "./components/Pabellon";
+import Administrador from "./components/Administrador";
 
 function App() {
   return (
     <div className="app">
       <Router>
         <Routes>
+          <Route path="/admin" element={<Administrador />} />
           <Route path="/" element={<Welcome />} />
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/medicos" element={<Medicos />} />
           <Route path="/auxiliares" element={<Auxiliares />} />
           <Route path="/examenes" element={<Examenes />} />
           <Route path="/admision" element={<Admision />} />
-          <Route path="/Pabellon" element={<Pabellon />} />
+          <Route path="/pabellon" element={<Pabellon />} />
         </Routes>
       </Router>
     </div>

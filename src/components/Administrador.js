@@ -13,7 +13,7 @@ import CheckIcon from '@mui/icons-material/Check';
 //import config icon
 import { Settings } from '@mui/icons-material';
 
-const Auxiliares = () => {
+const Medicos = () => {
   const [todo, setTodo] = useState("");
   const [mensaje_medicos, setTodos] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -123,7 +123,7 @@ const Auxiliares = () => {
       <div className="navbar">
         <h2>Canales</h2>
         <ul>
-        {["general","auxiliares"].map((channel) => (
+        {["general"].map((channel) => (
             <li key={channel} onClick={() => handleChannelChange(channel)}>
               {channel}
             </li>
@@ -178,4 +178,4 @@ const Auxiliares = () => {
   );
 };
 
-export default Auxiliares;
+export default Medicos;
