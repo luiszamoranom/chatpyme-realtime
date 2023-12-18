@@ -123,7 +123,7 @@ const Medicos = () => {
       <div className="navbar">
         <h2>Canales</h2>
         <ul>
-        {["general","auxiliares"].map((channel) => (
+        {["general","pabellon"].map((channel) => (
             <li key={channel} onClick={() => handleChannelChange(channel)}>
               {channel}
             </li>

@@ -84,7 +84,15 @@ export default function Homepage() {
   const handleIrAuxiliares = () => {
     navigate("/auxiliares");
   };
-
+  const handleIrAdmision = () => {
+    navigate("/admision");
+  };
+  const handleIrPabellon = () => {
+    navigate("/pabellon");
+  };
+  const handleIrExamenes = () => {
+    navigate("/examenes");
+  };
 
   const handleEditConfirm = () => {
     const userEmail = auth.currentUser.email;
@@ -123,6 +131,16 @@ export default function Homepage() {
       <button  onClick={handleIrAuxiliares}>
         Chat Auxiliares
       </button>
+      <button  onClick={handleIrAdmision}>
+        Chat Admision
+      </button>
+      <button  onClick={handleIrExamenes}>
+        Chat Examenes
+      </button>
+      <button  onClick={handleIrPabellon}>
+        Chat Pabellon
+      </button>
+
 
         <AddIcon onClick={writeToDatabase} className="add-confirm-icon" />
         <LogoutIcon onClick={handleSignOut} className="logout-icon" />
