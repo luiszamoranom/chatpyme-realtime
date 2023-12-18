@@ -33,6 +33,10 @@ export default function Welcome() {
     return () => unsubscribe();
   }, [navigate]);
 
+  const handleNavigate = () => {
+    navigate("/medicos");
+  };
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };

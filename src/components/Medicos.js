@@ -4,16 +4,16 @@ import { auth, db } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import { uid } from "uid";
 import { set, ref, onValue, remove, update } from "firebase/database";
-import "./homepage.css";
+import "./medicos.css";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LogoutIcon from '@mui/icons-material/Logout';
 import CheckIcon from '@mui/icons-material/Check';
 
-export default function Homepage() {
+export default function Medicos() {
   const [todo, setTodo] = useState("");
-  const [mensaje_general, setTodos] = useState([]);
+  const [mensaje_medicos, setTodos] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Homepage() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        onValue(ref(db, `/mensaje_general`), (snapshot) => {
+        onValue(ref(db, `/mensaje_medicos`), (snapshot) => {
           const data = snapshot.val();
           if (data !== null) {
             const sortedTodos = Object.values(data).sort((b,a) => b.timestamp - a.timestamp); // Ordena las tareas por marca de tiempo
@@ -61,7 +61,7 @@ export default function Homepage() {
     const userEmail = auth.currentUser.email;
     const username = getUsernameFromEmail(userEmail);
     const timestamp = Date.now(); // Obtener la marca de tiempo actual
-    set(ref(db, `/mensaje_general/${uidd}`), {
+    set(ref(db, `/mensaje_medicos/${uidd}`), {
       todo: `${username}: ${todo}`,
       uidd: uidd,
       timestamp: timestamp // Añadir la marca de tiempo
@@ -81,16 +81,11 @@ export default function Homepage() {
     navigate("/medicos");
   };
 
-  const handleIrAuxiliares = () => {
-    navigate("/auxiliares");
-  };
-
-
   const handleEditConfirm = () => {
     const userEmail = auth.currentUser.email;
     const username = getUsernameFromEmail(userEmail);
     const timestamp = Date.now();
-    update(ref(db, `/mensaje_general/${tempUidd}`), {
+    update(ref(db, `/mensaje_medicos/${tempUidd}`), {
       todo: `${username}: ${todo}`,
       timestamp: timestamp
     });
@@ -102,7 +97,7 @@ export default function Homepage() {
 
   // delete
   const handleDelete = (uid) => {
-    remove(ref(db, `/mensaje_general/${uid}`));
+    remove(ref(db, `/mensaje_medicos/${uid}`));
   };
 
   return (
@@ -117,11 +112,7 @@ export default function Homepage() {
         />
 
       <button  onClick={handleIrMedicos}>
-        Chat Medicos
-      </button>
-
-      <button  onClick={handleIrAuxiliares}>
-        Chat Auxiliares
+        Chat MEdicos
       </button>
 
         <AddIcon onClick={writeToDatabase} className="add-confirm-icon" />
@@ -129,7 +120,7 @@ export default function Homepage() {
       </div>
       
       <div className="homepage">
-      {mensaje_general.map((todo) => (
+      {mensaje_medicos.map((todo) => (
         <div className="todo">
           <h1>{formatTimestamp(todo.timestamp)} - {todo.todo}</h1>
           <EditIcon
