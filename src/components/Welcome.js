@@ -6,7 +6,6 @@ import {
 import { auth } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import "./welcome.css";
-import TodoSVG from '../assets/todo-svg.svg';
 import { set, ref } from "firebase/database";
 import { db } from "../firebase.js";
 
@@ -82,12 +81,12 @@ export default function Welcome() {
 
   const handleRegister = () => {
     if (registerInformation.email !== registerInformation.confirmEmail) {
-      alert("Please confirm that email are the same");
+      alert("Verifica que los email sean los mismos");
       return;
     } else if (
       registerInformation.password !== registerInformation.confirmPassword
     ) {
-      alert("Please confirm that password are the same");
+      alert("Verifica que los correos ean los mismos");
       return;
     }
     createUserWithEmailAndPassword(
@@ -109,7 +108,6 @@ export default function Welcome() {
 
   return (
     <div className="welcome">
-      <img src="https://www.sanvicentefundacion.com/sites/default/files/articles/Dise%C3%B1o%20sin%20t%C3%ADtulo%20%2837%29.png" className="todo-svg" alt="Todo List" />
       <h1>ChatPyme</h1>
       <div className="login-register-container">
         {isRegistering ? (
@@ -127,7 +125,7 @@ export default function Welcome() {
             />
             <input
               type="email"
-              placeholder="Confirm Email"
+              placeholder="Confirmar Email"
               value={registerInformation.confirmEmail}
               onChange={(e) =>
                 setRegisterInformation({
@@ -138,7 +136,7 @@ export default function Welcome() {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               value={registerInformation.password}
               onChange={(e) =>
                 setRegisterInformation({
@@ -149,7 +147,7 @@ export default function Welcome() {
             />
             <input
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Confirmar Contraseña"
               value={registerInformation.confirmPassword}
               onChange={(e) =>
                 setRegisterInformation({
@@ -176,7 +174,7 @@ export default function Welcome() {
               <option value="Pabellón">Pabellón</option>
             </select>
             <button className="sign-in-register-button" onClick={handleRegister}>
-              Register
+              Registrar
             </button>
             <button
               className="create-account-button"
@@ -197,10 +195,10 @@ export default function Welcome() {
               type="password"
               onChange={handlePasswordChange}
               value={password}
-              placeholder="Password"
+              placeholder="Contraseña"
             />
             <button className="sign-in-register-button" onClick={handleSignIn}>
-              Sign In
+              Iniciar sesión
             </button>
           </>
         )}

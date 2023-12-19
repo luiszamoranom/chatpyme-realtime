@@ -135,7 +135,6 @@ const Medicos = () => {
         <div className="chat-header">
           <h2>Chat - {selectedChannel}</h2>
           <p>Rol: {getUsernameFromEmail(auth.currentUser.email)}: Administrador</p>
-          <Settings onClick={handleConfigClick} className="config-icon" />
         </div>
 
         <div className="messages">
@@ -144,16 +143,6 @@ const Medicos = () => {
               {formatTimestamp(todo.timestamp)} - {todo.todo}
               {showIcons && ( 
                 <>
-                  <EditIcon
-                    fontSize="small"
-                    onClick={() => handleUpdate(todo)}
-                    className="edit-button"
-                  />
-                  <DeleteIcon
-                    fontSize="small"
-                    onClick={() => handleDelete(todo.uidd)}
-                    className="delete-button"
-                  />
                 </>
               )}
             </div>
