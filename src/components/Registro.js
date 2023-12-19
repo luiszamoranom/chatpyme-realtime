@@ -42,8 +42,7 @@ const Registro = () => {
           email: registerInformation.email,
           role: registerInformation.role,
         });
-        console.log("se registro");
-        navigate("/");
+        alert("se registró exitosamente")
       })
       .catch((err) => alert(err.message));
   };
@@ -65,7 +64,7 @@ const Registro = () => {
         />
         <input
           type="email"
-          placeholder="Confirm Email"
+          placeholder="Confirmar Email"
           value={registerInformation.confirmEmail}
           onChange={(e) =>
             setRegisterInformation({
@@ -76,7 +75,7 @@ const Registro = () => {
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Contraseña"
           value={registerInformation.password}
           onChange={(e) =>
             setRegisterInformation({
@@ -87,7 +86,7 @@ const Registro = () => {
         />
         <input
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Confirmar Contraseña"
           value={registerInformation.confirmPassword}
           onChange={(e) =>
             setRegisterInformation({
@@ -97,10 +96,10 @@ const Registro = () => {
           }
         />
         <button className="admin-view-button" onClick={handleAdmin}>
-          Go to Admin View
+          Volver a la vista de administrador
         </button>
         <button className="sign-in-register-button" onClick={handleRegister}>
-          Register
+          Registrar
         </button>
       </div>
     </div>

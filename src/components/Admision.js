@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { uid } from "uid";
 import { set, ref, onValue, remove, update } from "firebase/database";
 import "./medicos.css";
+import LogoutIcon from '@mui/icons-material/Logout';
+import CheckIcon from '@mui/icons-material/Check';
 
 const Medicos = () => {
   const [todo, setTodo] = useState("");
