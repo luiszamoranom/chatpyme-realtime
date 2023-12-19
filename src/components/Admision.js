@@ -5,13 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { uid } from "uid";
 import { set, ref, onValue, remove, update } from "firebase/database";
 import "./medicos.css";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import LogoutIcon from '@mui/icons-material/Logout';
-import CheckIcon from '@mui/icons-material/Check';
-//import config icon
-import { Settings } from '@mui/icons-material';
 
 const Medicos = () => {
   const [todo, setTodo] = useState("");
@@ -135,7 +128,6 @@ const Medicos = () => {
         <div className="chat-header">
           <h2>Chat - {selectedChannel}</h2>
           <p>Rol: {getUsernameFromEmail(auth.currentUser.email)}: Admision</p>
-          <Settings onClick={handleConfigClick} className="config-icon" />
         </div>
 
         <div className="messages">
@@ -144,16 +136,6 @@ const Medicos = () => {
               {formatTimestamp(todo.timestamp)} - {todo.todo}
               {showIcons && ( 
                 <>
-                  <EditIcon
-                    fontSize="small"
-                    onClick={() => handleUpdate(todo)}
-                    className="edit-button"
-                  />
-                  <DeleteIcon
-                    fontSize="small"
-                    onClick={() => handleDelete(todo.uidd)}
-                    className="delete-button"
-                  />
                 </>
               )}
             </div>

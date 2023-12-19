@@ -6,7 +6,6 @@ import {
 import { auth } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import "./welcome.css";
-import TodoSVG from '../assets/todo-svg.svg';
 import { set, ref } from "firebase/database";
 import { db } from "../firebase.js";
 
@@ -109,7 +108,6 @@ export default function Welcome() {
 
   return (
     <div className="welcome">
-      <img src="https://www.sanvicentefundacion.com/sites/default/files/articles/Dise%C3%B1o%20sin%20t%C3%ADtulo%20%2837%29.png" className="todo-svg" alt="Todo List" />
       <h1>ChatPyme</h1>
       <div className="login-register-container">
         {isRegistering ? (

@@ -1,11 +1,5 @@
-## Firebase Todo List
+# Links 
 
-**Version 1.0.0** 
-
-Description:
-The user will be able to add a todo, create, delete, and update.
-
-
-## License & copyright
-
-© Jay B. Crisostomo
+chatpyme.produccion.cl : link que redirecciona al nginx
+https://redes-nginx-reverse-proxy-avrjk2v6nq-uc.a.run.app : link de proxy inverso
+https://chatpyme-realtime-avrjk2v6nq-tl.a.run.app: link de la app react

@@ -10,8 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LogoutIcon from '@mui/icons-material/Logout';
 import CheckIcon from '@mui/icons-material/Check';
-//import config icon
-import { Settings } from '@mui/icons-material';
+
 
 const Auxiliares = () => {
   const [todo, setTodo] = useState("");
@@ -135,7 +134,6 @@ const Auxiliares = () => {
         <div className="chat-header">
           <h2>Chat - {selectedChannel}</h2>
           <p>Rol: {getUsernameFromEmail(auth.currentUser.email)}: Auxiliar</p>
-          <Settings onClick={handleConfigClick} className="config-icon" />
         </div>
 
         <div className="messages">
@@ -144,16 +142,6 @@ const Auxiliares = () => {
               {formatTimestamp(todo.timestamp)} - {todo.todo}
               {showIcons && ( 
                 <>
-                  <EditIcon
-                    fontSize="small"
-                    onClick={() => handleUpdate(todo)}
-                    className="edit-button"
-                  />
-                  <DeleteIcon
-                    fontSize="small"
-                    onClick={() => handleDelete(todo.uidd)}
-                    className="delete-button"
-                  />
                 </>
               )}
             </div>
