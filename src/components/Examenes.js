@@ -79,9 +79,6 @@ const Medicos = () => {
     setTempUidd(todo.uidd);
   };
 
-  const handleIrMedicos = () => {
-    navigate("/medicos");
-  };
 
   const handleEditConfirm = () => {
     const userEmail = auth.currentUser.email;

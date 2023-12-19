@@ -46,12 +46,43 @@ export default function Welcome() {
   };
 
   const handleSignIn = () => {
+    console.log("se loguea");
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        navigate("/homepage");
+        if (email.endsWith('@medicos.cl')) {
+          // Si es un correo de médico, redirigir a la vista /medico
+          console.log("redirigio a medico");
+          navigate("/medicos"); // Aquí corregí la ruta a "/medicos"
+        } 
+        if(email.endsWith('@auxiliares.cl')) {
+          console.log("redirigio a auxiliares");
+          navigate("/auxiliares");
+        }
+        if(email.endsWith('@examenes.cl')) {
+          console.log("redirigio a examenes");
+          navigate("/examenes");
+        }
+        if(email.endsWith('@admision.cl')) {
+          console.log("redirigio a admision");
+          navigate("/admision");
+        }
+        if(email.endsWith('@pabellon.cl')) {
+          console.log("redirigio a pabellon");
+          navigate("/pabellon");
+        }
+        if(email.endsWith('@admin.cl')) {
+          console.log("redirigio a admin");
+          navigate("/admin");
+        }
+        else {
+          console.log("redirigio a homepage");
+          // De lo contrario, redirigir a la vista /homepage
+          navigate("/homepage");
+        }
       })
       .catch((err) => alert(err.message));
   };
+  
 
   const handleRegister = () => {
     if (registerInformation.email !== registerInformation.confirmEmail) {
