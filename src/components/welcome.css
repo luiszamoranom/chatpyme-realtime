@@ -62,8 +62,11 @@
 }
 
 .todo-svg {
-  position: absolute;
-  bottom: 100px;
-  right: 300px;
+  position: fixed; /* Cambiado a 'fixed' para que la posición sea relativa a la ventana de visualización */
+  bottom: 0;
+  right: 0;
+  width: 100vw; /* Ancho al 100% de la ventana de visualización */
+  height: 100vh; /* Altura al 100% de la ventana de visualización */
   transform: scale(1.3);
 }
+
