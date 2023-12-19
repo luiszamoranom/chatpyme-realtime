@@ -20,7 +20,7 @@ const Medicos = () => {
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
   const [showIcons, setShowIcons] = useState(false);
-  const [selectedChannel, setSelectedChannel] = useState("medicos");
+  const [selectedChannel, setSelectedChannel] = useState("general");
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -79,9 +79,6 @@ const Medicos = () => {
     setTempUidd(todo.uidd);
   };
 
-  const handleIrMedicos = () => {
-    navigate("/medicos");
-  };
 
   const handleEditConfirm = () => {
     const userEmail = auth.currentUser.email;
@@ -129,11 +126,15 @@ const Medicos = () => {
             </li>
         ))}
         </ul>
+        <button onClick={() => navigate("/registro")}>
+          Registrar cuentas
+        </button>
       </div>
 
       <div className="chat">
         <div className="chat-header">
           <h2>Chat - {selectedChannel}</h2>
+          <p>Rol: {getUsernameFromEmail(auth.currentUser.email)}: Administrador</p>
           <Settings onClick={handleConfigClick} className="config-icon" />
         </div>
 

@@ -20,7 +20,7 @@ const Medicos = () => {
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
   const [showIcons, setShowIcons] = useState(false);
-  const [selectedChannel, setSelectedChannel] = useState("medicos");
+  const [selectedChannel, setSelectedChannel] = useState("general");
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -123,7 +123,7 @@ const Medicos = () => {
       <div className="navbar">
         <h2>Canales</h2>
         <ul>
-        {["medicos", "admision", "pabellon", "examenes", "auxiliares"].map((channel) => (
+        {["general","medicos", "admision", "pabellon", "examenes", "auxiliares"].map((channel) => (
             <li key={channel} onClick={() => handleChannelChange(channel)}>
               {channel}
             </li>
@@ -133,7 +133,8 @@ const Medicos = () => {
 
       <div className="chat">
         <div className="chat-header">
-          <h2>Chat - {selectedChannel}</h2>
+          <h2> Chat - {selectedChannel}</h2>
+          <p>Rol: {getUsernameFromEmail(auth.currentUser.email)}: Medico</p>
           <Settings onClick={handleConfigClick} className="config-icon" />
         </div>
 
@@ -159,7 +160,7 @@ const Medicos = () => {
           ))}
         </div>
 
-        <div className="input-box">
+  <div className="input-box">
   <input
     type="text"
     placeholder={isEdit ? "Editar mensaje..." : "Nuevo mensaje..."}

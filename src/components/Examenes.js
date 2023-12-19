@@ -20,7 +20,7 @@ const Medicos = () => {
   const [tempUidd, setTempUidd] = useState("");
   const navigate = useNavigate();
   const [showIcons, setShowIcons] = useState(false);
-  const [selectedChannel, setSelectedChannel] = useState("medicos");
+  const [selectedChannel, setSelectedChannel] = useState("general");
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -131,6 +131,7 @@ const Medicos = () => {
       <div className="chat">
         <div className="chat-header">
           <h2>Chat - {selectedChannel}</h2>
+          <p>Rol: {getUsernameFromEmail(auth.currentUser.email)}: Examenes</p>
           <Settings onClick={handleConfigClick} className="config-icon" />
         </div>
 

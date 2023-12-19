@@ -27,7 +27,8 @@ export default function Welcome() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigate("/homepage");
+        console.log("redirige a welcome");
+        navigate("/");
       }
     });
     return () => unsubscribe();
@@ -54,30 +55,25 @@ export default function Welcome() {
           console.log("redirigio a medico");
           navigate("/medicos"); // Aquí corregí la ruta a "/medicos"
         } 
-        if(email.endsWith('@auxiliares.cl')) {
+        else if(email.endsWith('@auxiliares.cl')) {
           console.log("redirigio a auxiliares");
           navigate("/auxiliares");
         }
-        if(email.endsWith('@examenes.cl')) {
+        else if(email.endsWith('@examenes.cl')) {
           console.log("redirigio a examenes");
           navigate("/examenes");
         }
-        if(email.endsWith('@admision.cl')) {
+        else if(email.endsWith('@admision.cl')) {
           console.log("redirigio a admision");
           navigate("/admision");
         }
-        if(email.endsWith('@pabellon.cl')) {
+        else if(email.endsWith('@pabellon.cl')) {
           console.log("redirigio a pabellon");
           navigate("/pabellon");
         }
-        if(email.endsWith('@admin.cl')) {
+        else if(email.endsWith('@admin.cl')) {
           console.log("redirigio a admin");
           navigate("/admin");
-        }
-        else {
-          console.log("redirigio a homepage");
-          // De lo contrario, redirigir a la vista /homepage
-          navigate("/homepage");
         }
       })
       .catch((err) => alert(err.message));
@@ -105,7 +101,8 @@ export default function Welcome() {
           email: registerInformation.email,
           role: registerInformation.role
         });
-        navigate("/homepage");
+        console.log("se registro");
+        navigate("/");
       })
       .catch((err) => alert(err.message));
   };
@@ -205,15 +202,10 @@ export default function Welcome() {
             <button className="sign-in-register-button" onClick={handleSignIn}>
               Sign In
             </button>
-            <button
-              className="create-account-button"
-              onClick={() => setIsRegistering(true)}
-            >
-              Create an account
-            </button>
           </>
         )}
       </div>
     </div>
   );
 }
+
